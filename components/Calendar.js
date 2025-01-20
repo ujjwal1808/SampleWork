@@ -6,7 +6,7 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 const Calendar = () => {
 
-  const [value, setValue] = React.useState(dayjs('2022-04-17'));
+  const [value, setValue] = React.useState(dayjs());
   return (
     <div >
         <LocalizationProvider dateAdapter={AdapterDayjs}>

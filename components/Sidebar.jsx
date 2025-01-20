@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from 'react';
 import "../app/style.css"
 import { FaProjectDiagram, FaMoneyBill, FaClipboard, FaCalendarAlt, FaFile } from 'react-icons/fa';
@@ -14,14 +13,16 @@ import { FaUsersGear, FaPeopleGroup, FaHelmetSafety, FaFileWaveform, FaCar, FaTo
 import { GoFileDirectoryFill } from "react-icons/go";
 import { IoTimerOutline } from "react-icons/io5";
 import { TbReportAnalytics } from "react-icons/tb";
-
+import { useParams } from 'next/navigation';
 import { AiOutlineSchedule } from "react-icons/ai";
 import { BsReverseListColumnsReverse } from "react-icons/bs";
 import { LuListTodo } from "react-icons/lu";
 import { MdWork } from "react-icons/md";
+import Link from 'next/link';
 
 
-export default function Sidebar() {
+export default function Sidebar(props) {
+  
   const [isOpen, setIsOpen] = useState({
     projectManagement: true,
     financials: false,
@@ -38,7 +39,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="w-1/5 bg-white shadow-md h-screen mt-20 p-4 fixed overflow-auto" >
+    <div className="w-1/6 bg-white shadow-md h-screen mt-20 p-4 fixed overflow-auto" >
       <ul className=''>
         <li>
           <button
@@ -53,11 +54,25 @@ export default function Sidebar() {
           </button>
           {isOpen.projectManagement && (
             <ul className=" text-gray-500" >
-              <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <FaProjectDiagram className="mr-5" /> Projects</li>
-              <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <BsReverseListColumnsReverse className="mr-5" /> Daily Logs</li>
-              <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <AiOutlineSchedule className="mr-5"/> Schedule</li>
-              <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <LuListTodo className="mr-5"/> Todo</li>
-              <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <MdWork className="mr-5"/> Work Orders</li>
+              <Link href='/projects' >
+              <li className={`py-1 flex items-center pl-6 hover:rounded-lg hover:text-black hover:font-medium cursor-pointer ${props.active === 'projects' ? 'bg-[#BD9B58] rounded-lg font-medium text-white': 'hover:bg-[#EADDCB]'} `} > <FaProjectDiagram className="mr-5" /> Projects</li>
+              </Link>
+              
+              <Link href='/daily_logs'>
+              <li className={`py-1 flex items-center pl-6 hover:rounded-lg hover:text-black hover:font-medium cursor-pointer ${props.active === 'daily logs' ? 'bg-[#BD9B58] rounded-lg font-medium text-white': 'hover:bg-[#EADDCB]'} `}> <BsReverseListColumnsReverse className="mr-5" /> Daily Logs</li>
+              </Link>
+
+              <Link href='/schedule'>
+              <li className={`py-1 flex items-center pl-6 hover:rounded-lg hover:text-black hover:font-medium cursor-pointer ${props.active === 'schedule' ? 'bg-[#BD9B58] rounded-lg font-medium text-white': 'hover:bg-[#EADDCB]'} `}> <AiOutlineSchedule className="mr-5"/> Schedule</li>
+              </Link>
+              
+              <Link href='/todo'>
+              <li className={`py-1 flex items-center pl-6 hover:rounded-lg hover:text-black hover:font-medium cursor-pointer ${props.active === 'todo' ? 'bg-[#BD9B58] rounded-lg font-medium text-white': 'hover:bg-[#EADDCB]'} `}> <LuListTodo className="mr-5"/> Todo</li>
+              </Link>
+
+              <Link href='/work_order'>
+              <li className={`py-1 flex items-center pl-6 hover:rounded-lg hover:text-black hover:font-medium cursor-pointer ${props.active === 'work_order' ? 'bg-[#BD9B58] rounded-lg font-medium text-white': 'hover:bg-[#EADDCB]'} `}> <MdWork className="mr-5"/> Work Orders</li>
+              </Link>
             </ul>
           )}
         </li>
@@ -67,13 +82,12 @@ export default function Sidebar() {
             className="flex items-center justify-between w-full px-2 py-2 text-left"
           >
             <div className="flex items-center font-medium" style={{color:"#BD9B58"}}>
-              
               Financials
             </div>
             <span>{isOpen.financials ? '-' : '+'}</span>
           </button>
           {isOpen.financials && (
-            <ul className="pl-6 text-gray-500">
+            <ul className=" text-gray-500">
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <LiaFileInvoiceSolid className='mr-5' /> Invoices</li>
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"><FaMoneyBill className="mr-5" /> Payment </li>
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <GiExpense className="mr-5" /> Expenses</li>
@@ -96,7 +110,7 @@ export default function Sidebar() {
             <span>{isOpen.bids ? '-' : '+'}</span>
           </button>
           {isOpen.bids && (
-            <ul className="pl-6 text-gray-500" >
+            <ul className=" text-gray-500" >
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <FaClipboard className="mr-5" /> Estimates</li>
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <GrWorkshop className='mr-5'/> Customers</li>
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <FaUsersGear className='mr-5'/> Leads</li>
@@ -115,7 +129,7 @@ export default function Sidebar() {
             <span>{isOpen.hr ? '-' : '+'}</span>
           </button>
           {isOpen.hr && (
-            <ul className="pl-6 text-gray-500">
+            <ul className=" text-gray-500">
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <GoFileDirectoryFill className='mr-5' /> Directory</li>
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <IoTimerOutline className='mr-5'/> Timecard</li>
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <FaCalendarAlt className='mr-5'/> Calendar</li>
@@ -137,7 +151,7 @@ export default function Sidebar() {
             <span>{isOpen.documents ? '-' : '+'}</span>
           </button>
           {isOpen.documents && (
-            <ul className="pl-6 text-gray-500">
+            <ul className=" text-gray-500">
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <FaFile className="mr-5" />Files</li>
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <TbReportAnalytics className='mr-5'/> Reports</li>
               <li className="py-1 flex items-center pl-6  hover:bg-[#EADDCB] hover:rounded-lg hover:text-black hover:font-medium cursor-pointer"> <FaCar className='mr-5'/> Vehicle Logs</li>

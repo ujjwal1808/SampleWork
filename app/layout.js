@@ -1,9 +1,6 @@
 
-
-import Header from "@/components/Header";
 import "./globals.css";
 import { Poppins } from 'next/font/google';
-import Sidebar from "@/components/Sidebar";
 
 
 const poppins = Poppins({
@@ -25,6 +22,8 @@ export default function RootLayout({ children }) {
       <body className={`${poppins.variable} antialiased`} >
         
         <div className="w-full  justify-self-end ">
+      
+
         {children}
         </div>
 

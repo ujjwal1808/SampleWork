@@ -12,7 +12,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { Box } from '@mui/material';
 import TabCards from '@/components/TabCards';
-import Breadcrum from '@/components/Breadcrum';
+import BreadcrumMain from '@/components/BreadcrumMain';
 import Calendar from '@/components/Calendar';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
@@ -74,8 +74,8 @@ const page = () => {
     <Header />
     <Sidebar />
   </div>
-    <main className="justify-self-end w-4/5 p-6 bg-gray-100 h-full  pt-24 ">
-      <Breadcrum />
+    <main className="justify-self-end w-5/6 p-6 bg-gray-100 h-full  pt-24 ">
+      <BreadcrumMain />
       <div className=' grid grid-cols-3 gap-4'>
         <div className='grid grid-4 gap-4'>
 
